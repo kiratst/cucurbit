@@ -56,8 +56,8 @@ class ServiceProvider extends CucurbitSupport
 	private function registerSchedule()
 	{
 		$this->app['events']->listen('console.schedule', function (Schedule $schedule) {
-//			$schedule->command('order:delete_expired')
-//				->everyThirtyMinutes()->appendOutputTo($this->consoleLog());
+			$schedule->command('command')
+				->everyThirtyMinutes()->appendOutputTo($this->consoleLogPath());
 		});
 	}
 }
