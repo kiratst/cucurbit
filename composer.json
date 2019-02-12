@@ -1,6 +1,5 @@
 {
     "name": "cucurbit/framework",
-    "type": "composer-plugin",
     "authors": [
         {
             "name": "lpt",
