@@ -1,0 +1,31 @@
+{
+    "name": "cucurbit/framework",
+    "type": "composer-plugin",
+    "authors": [
+        {
+            "name": "lpt",
+            "email": "kiratst@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+		"php": ">=7.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Cucurbit\\Framework\\": "src/",
+			"Cucurbit\\Tests\\": "tests/"
+		},
+		"files": [
+			"src/Functions/functions.php"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+		
+		}
+	},
+	"config": {
+		"preferred-install": "dist"
+	}
+}
