@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
 			'namespace' => 'StubNamespace\Application\Controllers',
 			'prefix'    => 'Module',
 		], function (Router $router) {
-			require_once module_path('Module', 'Http/Routes/front.php');
+			require_once module_path('Module', 'Application/Http/Routes/front.php');
 		});
 	}
 
@@ -72,7 +72,7 @@ class RouteServiceProvider extends ServiceProvider
 			'namespace' => 'StubNamespace\Application\Controllers',
 			'prefix'    => 'api/Module',
 		], function (Router $router) {
-			require_once module_path('Module', 'Http/Routes/api.php');
+			require_once module_path('Module', 'Application/Http/Routes/api.php');
 		});
 	}
 }

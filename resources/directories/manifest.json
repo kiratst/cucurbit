@@ -1,0 +1,7 @@
+{
+	"name": "Module",
+	"module": "Module",
+	"autoload": [
+		"Application/Functions/functions.php"
+	]
+}

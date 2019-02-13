@@ -43,7 +43,7 @@ class FileRepository extends Repository
 	 */
 	public function exists($key): bool
 	{
-		return $this->names()->contains($key);
+		return $this->names()->offsetExists($key);
 	}
 
 
@@ -55,11 +55,17 @@ class FileRepository extends Repository
 	public function optimize()
 	{
 		$cachePath = $this->getCachePath();
-		//		$cache     = $this->getCache();
+		// $content   = $this->getCache();
 		$baseNames = $this->getAllBaseNames();
 
 		// update module cache
-		$content = json_encode($baseNames->toArray(), JSON_PRETTY_PRINT);
+		$content = collect();
+		$baseNames->each(function ($module) use ($content) {
+			$manifest = $this->getManifest($module);
+			$content->put($module, $manifest);
+		});
+
+		$content = json_encode($content->toArray(), JSON_PRETTY_PRINT);
 		$this->files->put($cachePath, $content);
 
 		// update composer.json
@@ -75,10 +81,10 @@ class FileRepository extends Repository
 	 */
 	public function updateComposer()
 	{
-		$names    = $this->getAllBaseNames();
+		$names     = $this->getAllBaseNames();
 		$base_path = base_path();
 
-		$file    = $base_path . '/composer.json';
+		$file = $base_path . '/composer.json';
 		try {
 			$content = $this->files->get($file);
 		} catch (FileNotFoundException $e) {
@@ -110,7 +116,7 @@ class FileRepository extends Repository
 
 		$data['autoload']['psr-4'] = $modules;
 
-		$content = json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+		$content = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 		$this->files->put($file, $content);
 		return true;
 	}
@@ -154,7 +160,6 @@ class FileRepository extends Repository
 		$cachePath = $this->getCachePath();
 		if (!$this->files->exists($cachePath)) {
 			$this->createCache();
-			$this->optimize();
 		}
 
 		return collect(json_decode($this->files->get($cachePath), true));

@@ -46,4 +46,6 @@ interface Repository
 	 * @return bool
 	 */
 	public function set($property, $value): bool;
+
+	public function getManifest($module);
 }

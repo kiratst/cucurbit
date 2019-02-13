@@ -72,7 +72,7 @@ class MakeMiddlewareCommand extends Command
 		}
 
 		$middleware      = $this->argument('middleware');
-		$middleware_file = module_path($module, 'Http/Middleware/' . $middleware) . '.php';
+		$middleware_file = module_path($module, 'Application/Http/Middleware/' . $middleware) . '.php';
 
 		if ($this->files->exists($middleware_file)) {
 			$this->error('Model ' . $middleware . ' already exists!');

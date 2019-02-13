@@ -32,7 +32,8 @@ class Service
 		// all modules
 		$modules = $this->repository->all();
 		$modules->each(function ($module) {
-			$this->registerServiceProvider($module);
+			$this->registerServiceProvider($module['module']);
+			$this->autoloadFiles($module);
 		});
 
 	}
@@ -46,6 +47,22 @@ class Service
 		$service_provider = module_class($module, 'ServiceProvider');
 		if (class_exists($service_provider)) {
 			$this->app->register($service_provider);
+		}
+	}
+
+	/**
+	 * autoload module files
+	 * @param string $module module_name
+	 */
+	private function autoloadFiles($module)
+	{
+		if (isset($module['autoload'])) {
+			foreach ($module['autoload'] as $file) {
+				$path = module_path($module['module'], $file);
+				if (file_exists($path)) {
+					include $path;
+				}
+			}
 		}
 	}
 

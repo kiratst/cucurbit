@@ -12,6 +12,10 @@ class StringHelper
 
 	const STRING_TAGS_BR = 'br'; //br标签
 
+	/* 地球赤道半径
+	 * ---------------------------------------- */
+	const EARTH_RADIUS = 6378.135;
+
 	protected static $snakeCache = [];
 
 	protected static $camelCache = [];
@@ -156,7 +160,7 @@ class StringHelper
 	 *
 	 * @return float|int
 	 */
-	public static function distance($lat1, $lon1, $lat2, $lon2, $radius = 6378.135)
+	public static function distance($lat1, $lon1, $lat2, $lon2, $radius = self::EARTH_RADIUS)
 	{
 		$rad = M_PI / 180;
 
@@ -178,6 +182,31 @@ class StringHelper
 		}
 
 		return $dist * $radius;
+	}
+
+	/**
+	 * 计算某个经纬度的周围某段距离的正方形的四个点
+	 *
+	 * @param float $lng      经度
+	 * @param float $lat      纬度
+	 * @param float $distance 该点所在圆的半径，该圆与此正方形内切，默认值为0.5千米
+	 *
+	 * @return array 正方形的四个点的经纬度坐标
+	 */
+	public static function squarePoint($lng, $lat, $distance = 0.5): array
+	{
+		$dlng = 2 * asin(sin($distance / (2 * self::EARTH_RADIUS)) / cos(deg2rad($lat)));
+		$dlng = rad2deg($dlng);
+
+		$dlat = $distance / self::EARTH_RADIUS;
+		$dlat = rad2deg($dlat);
+
+		return [
+			'left-top'     => ['lat' => $lat + $dlat, 'lng' => $lng - $dlng],
+			'right-top'    => ['lat' => $lat + $dlat, 'lng' => $lng + $dlng],
+			'left-bottom'  => ['lat' => $lat - $dlat, 'lng' => $lng - $dlng],
+			'right-bottom' => ['lat' => $lat - $dlat, 'lng' => $lng + $dlng],
+		];
 	}
 
 	/**

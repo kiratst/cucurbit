@@ -1,6 +1,7 @@
 <?php namespace Cucurbit\Framework\Service\Repository;
 
 use Cucurbit\Framework\Service\Repository\Interfaces\Repository as BaseRepository;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 
@@ -63,4 +64,26 @@ abstract class Repository implements BaseRepository
 		}
 	}
 
+	/**
+	 * @param $module
+	 * @return array|mixed|string
+	 * @throws \Exception
+	 */
+	public function getManifest($module)
+	{
+		$manifest_path = $this->getManifestPath($module);
+		try {
+			$content = $this->files->get($manifest_path);
+			$content = json_decode($content, true) ?? [];
+		} catch (FileNotFoundException $e) {
+			throw new \Exception('file not found: ' . $manifest_path);
+		}
+
+		return $content;
+	}
+
+	protected function getManifestPath($module): string
+	{
+		return module_path($module) . '/manifest.json';
+	}
 }
