@@ -31,8 +31,8 @@ class Service
 	{
 		// all modules
 		$modules = $this->repository->all();
-		$modules->each(function ($module) {
-			$this->registerServiceProvider($module['module']);
+		$modules->each(function ($module, $module_name) {
+			$this->registerServiceProvider($module_name);
 			$this->autoloadFiles($module);
 		});
 
@@ -44,9 +44,11 @@ class Service
 	 */
 	public function registerServiceProvider($module)
 	{
-		$service_provider = module_class($module, 'ServiceProvider');
-		if (class_exists($service_provider, false)) {
-			$this->app->register($service_provider);
+		if ($this->repository->files->isDirectory($module)) {
+			$service_provider = module_class($module, 'ServiceProvider');
+			if (class_exists($service_provider)) {
+				$this->app->register($service_provider);
+			}
 		}
 	}
 
