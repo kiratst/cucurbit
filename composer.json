@@ -8,7 +8,15 @@
     ],
     "minimum-stability": "dev",
     "require": {
-		"php": ">=7.0.0"
+		"php": ">=7.0.0",
+		"laravel/framework" : "5.5.*"
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"\\Cucurbit\\Framework\\ServiceProvider"
+			]
+		}
 	},
 	"autoload": {
 		"psr-4": {

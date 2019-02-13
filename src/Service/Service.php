@@ -45,7 +45,7 @@ class Service
 	public function registerServiceProvider($module)
 	{
 		$service_provider = module_class($module, 'ServiceProvider');
-		if (class_exists($service_provider)) {
+		if (class_exists($service_provider, false)) {
 			$this->app->register($service_provider);
 		}
 	}
