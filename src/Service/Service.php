@@ -44,7 +44,7 @@ class Service
 	 */
 	public function registerServiceProvider($module)
 	{
-		if ($this->repository->files->isDirectory($module)) {
+		if ($this->repository->files->isDirectory(module_path($module))) {
 			$service_provider = module_class($module, 'ServiceProvider');
 			if (class_exists($service_provider)) {
 				$this->app->register($service_provider);

@@ -86,7 +86,7 @@ class MakeModuleCommand extends Command
 			$content = $this->replaceContent($resource_file->getContents());
 
 			$subPath  = $resource_file->getRelativePathname();
-			$filePath = $module_directory . '/Application/' . $subPath;
+			$filePath = $module_directory . '/' . $subPath;
 			$dir      = \dirname($filePath);
 
 			if (!$this->files->isDirectory($dir)) {
