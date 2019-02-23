@@ -7,6 +7,15 @@
 class UtilHelper
 {
 	/**
+	 * @param string $string ip
+	 * @return bool
+	 */
+	public static function isIp($string): bool
+	{
+		return (bool) filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6);
+	}
+
+	/**
 	 * @param string $string
 	 * @return false|int
 	 */

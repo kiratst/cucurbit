@@ -167,3 +167,13 @@ if (!function_exists('get_num_from_string')) {
 		return 0;
 	}
 }
+
+if (!function_exists('is_ip')) {
+	/**
+	 * @param string $string ip
+	 * @return bool
+	 */
+	function is_ip($string) {
+		return \Cucurbit\Framework\Helpers\UtilHelper::isIp($string);
+	}
+}

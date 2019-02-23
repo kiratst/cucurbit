@@ -1,0 +1,44 @@
+#backend:
+#    title: tag_name
+#    groups:
+#        -
+#            title: group_name1
+#            children:
+#                -
+#                    title: setting1
+#                    route: your_route_name1
+#                -
+#                    title: setting2
+#                    route: your_route_name2
+#        -
+#            title: group_name2
+#            children:
+#                -
+#                    title: user1
+#                    route: your_route_name1
+#                -
+#                    title: user2
+#                    route: your_route_name2
+#
+#e.g. :
+backend:
+    title: 系统设置
+    groups:
+        -
+            title: 系统设置
+            children:
+                -
+                    title: setting1
+                    route: api:backend.system.index
+                -
+                    title: setting2
+                    route: api:backend.system.home
+        -
+            title: 用户管理
+            children:
+                -
+                    title: user1
+                    route: api:backend.system.home
+                -
+                    title: user2
+                    route: api:backend.system.index

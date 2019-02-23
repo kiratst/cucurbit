@@ -16,6 +16,10 @@ class ServiceProvider extends BaseServiceProvider
 
 	public function boot()
 	{
+		$this->publishes([
+			__DIR__ . '/../config/cucurbit.php' => config_path('cucurbit.php'),
+		], 'cucurbit-framework');
+
 		$this->app['cucurbit']->register();
 	}
 
