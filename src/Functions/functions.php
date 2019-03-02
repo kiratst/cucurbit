@@ -177,3 +177,19 @@ if (!function_exists('is_ip')) {
 		return \Cucurbit\Framework\Helpers\UtilHelper::isIp($string);
 	}
 }
+
+if (!function_exists('image2base64')) {
+	/**
+	 * image to base64
+	 * @param string $file_path file_path
+	 * @return string
+	 */
+	function image2base64($file_path)
+	{
+		$image_info   = getimagesize($file_path);
+		$image_data   = fread(fopen($file_path, 'rb'), filesize($file_path));
+
+		$base64_image = 'data:' . $image_info['mime'] . ';base64,' . chunk_split(base64_encode($image_data));
+		return $base64_image;
+	}
+}
