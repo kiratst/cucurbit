@@ -21,6 +21,12 @@ abstract class ServiceProvider extends BaseServiceProvider
 	public function boot()
 	{
 		if ($module = $this->getModule(\func_get_args())) {
+
+			// views
+			$module_path = module_path($module);
+			$this->loadViewsFrom($module_path . '/Resources/Views', $module);
+			$this->loadTranslationsFrom($module_path . '/Resources/Lang', $module);
+
 			if ($this->listeners) {
 				$this->bootListener();
 			}
