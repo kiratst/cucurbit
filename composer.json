@@ -24,7 +24,7 @@
 			"Cucurbit\\Tests\\": "tests/"
 		},
 		"files": [
-			"src/Functions/functions.php"
+			"src/functions/functions.php"
 		]
 	},
 	"autoload-dev": {

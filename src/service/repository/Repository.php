@@ -56,7 +56,7 @@ abstract class Repository implements BaseRepository
 		try {
 			$collection = collect($this->files->directories($path));
 			$baseNames  = $collection->map(function ($item, $key) {
-				return ucfirst(basename($item));
+				return basename($item);
 			});
 			return $baseNames;
 		} catch (\Throwable $e) {

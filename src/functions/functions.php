@@ -10,13 +10,13 @@ if (!function_exists('module_path')) {
 	 */
 	function module_path($module = null, $file = null)
 	{
-		$base_path = base_path('Modules');
+		$base_path = base_path('modules');
 
 		if (!$module) {
 			return $base_path;
 		}
 
-		$module = ucfirst($module);
+		$module = strtolower($module);
 
 		$module_path = $module ? $base_path . '/' . ltrim($module, '/') : '';
 		if (!$file) {

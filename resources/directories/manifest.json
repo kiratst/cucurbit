@@ -2,6 +2,6 @@
 	"name": "Module",
 	"module": "Module",
 	"autoload": [
-		"Application/Functions/functions.php"
+		"application/functions/functions.php"
 	]
 }

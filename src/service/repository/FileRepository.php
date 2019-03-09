@@ -72,6 +72,11 @@ class FileRepository extends Repository
 		//		$this->updateComposer();
 		//
 		//		exec('composer dump-autoload');
+
+		// clear cache autoload
+
+		exec('composer dump-autoload');
+
 		return true;
 	}
 
@@ -108,8 +113,8 @@ class FileRepository extends Repository
 
 		$modules = [];
 		$names->each(function ($item) use (&$modules) {
-			$key   = ucfirst($item);
-			$value = "modules/{$key}/Application/";
+			$key   = strtolower($item);
+			$value = "modules/{$key}/application/";
 
 			$modules["{$key}\\"] = $value;
 		});

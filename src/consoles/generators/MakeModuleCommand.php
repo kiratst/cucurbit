@@ -75,7 +75,7 @@ class MakeModuleCommand extends Command
 			$this->files->makeDirectory($module_directory);
 		}
 
-		$this->replace_container['namespace'] = 'Modules\\' . $module;
+		$this->replace_container['namespace'] = 'Modules\\' . ucfirst($module);
 		$this->replace_container['Module']    = lcfirst($module);
 
 		/* stubs resource

@@ -4,23 +4,23 @@ use Cucurbit\Framework\Service\Service;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class MakeModelCommand extends Command
+class MakeMiddlewareCommand extends Command
 {
 	/**
 	 * The name and signature of the console command.
 	 *
 	 * @var string
 	 */
-	protected $signature = 'cucurbit:model 
+	protected $signature = 'cucurbit:middleware 
 				{module : the name of module}
-				{model : the name of model} ';
+				{middleware : the name of middleware} ';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'create a model';
+	protected $description = 'create a middleware';
 
 	/**
 	 * @var Filesystem
@@ -59,7 +59,7 @@ class MakeModelCommand extends Command
 	{
 		// module name
 		$module = $this->argument('module');
-		$module = ucfirst(strtolower($module));
+		$module = strtolower($module);
 
 		if (!$this->service->exists($module)) {
 			$this->error('Module ' . $module . ' does not exists!');
@@ -71,24 +71,24 @@ class MakeModelCommand extends Command
 			return false;
 		}
 
-		$model      = $this->argument('model');
-		$model_file = module_path($module, 'Models/' . $model) . '.php';
+		$middleware      = $this->argument('middleware');
+		$middleware_file = module_path($module, 'application/http/middleware/' . $middleware) . '.php';
 
-		if ($this->files->exists($model_file)) {
-			$this->error('Model ' . $model . ' already exists!');
+		if ($this->files->exists($middleware_file)) {
+			$this->error('Model ' . $middleware . ' already exists!');
 			return false;
 		}
 
-		$this->replace_container['namespace'] = 'Modules\\' . $module;
-		$this->replace_container['ModelName'] = $model;
+		$this->replace_container['namespace']      = 'Modules\\' . ucfirst($module);
+		$this->replace_container['MiddlewareName'] = $middleware;
 
 		/* stubs resource
 		 * ---------------------------------------- */
-		$resource_path = __DIR__ . '/stubs/ModelStub.stub';
+		$resource_path = __DIR__ . '/stubs/MiddlewareStub.stub';
 		try {
 			$content = $this->replaceContent($this->files->get($resource_path));
 
-			$this->files->put($model_file, $content);
+			$this->files->put($middleware_file, $content);
 
 		} catch (\Throwable $e) {
 			$this->error($e->getMessage());
@@ -108,11 +108,11 @@ class MakeModelCommand extends Command
 	{
 		$search  = [
 			'StubNamespace',
-			'ModelName',
+			'MiddlewareName',
 		];
 		$replace = [
 			$this->replace_container['namespace'],
-			$this->replace_container['ModelName'],
+			$this->replace_container['MiddlewareName'],
 		];
 
 		return str_replace($search, $replace, $content);

@@ -24,8 +24,8 @@ abstract class ServiceProvider extends BaseServiceProvider
 
 			// views
 			$module_path = module_path($module);
-			$this->loadViewsFrom($module_path . '/Resources/Views', $module);
-			$this->loadTranslationsFrom($module_path . '/Resources/Lang', $module);
+			$this->loadViewsFrom($module_path . '/resources/views', $module);
+			$this->loadTranslationsFrom($module_path . '/resources/lang', $module);
 
 			if ($this->listeners) {
 				$this->bootListener();
@@ -45,7 +45,7 @@ abstract class ServiceProvider extends BaseServiceProvider
 	 */
 	public function getModule($args)
 	{
-		$name = (isset($args[0]) and \is_string($args[0])) ? ucfirst($args[0]) : null;
+		$name = (isset($args[0]) and \is_string($args[0])) ? strtolower($args[0]) : null;
 		if ($name) {
 			if (!app('cucurbit')->exists($name)) {
 				throw new \Exception("Module {$name} doesn't exists");
