@@ -11,8 +11,6 @@ class AutoLoadServiceProvider extends ServiceProvider
 		$autoloader = new ClassAutoLoader($this->app);
 
 		$this->app->instance(ClassAutoLoader::class, $autoloader);
-
 		$autoloader->register();
 	}
-
 }
