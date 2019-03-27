@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Service\Repository;
+<?php
+
+namespace Cucurbit\Framework\Repository;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;

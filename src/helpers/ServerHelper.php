@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Helpers;
+<?php
+
+namespace Cucurbit\Framework\Helpers;
 
 /**
  * Server 信息获取

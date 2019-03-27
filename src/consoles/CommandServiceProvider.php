@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Consoles;
+<?php
+
+namespace Cucurbit\Framework\Consoles;
 
 use Cucurbit\Framework\Consoles\Commands\OptimizeCommand;
 use Illuminate\Support\ServiceProvider;

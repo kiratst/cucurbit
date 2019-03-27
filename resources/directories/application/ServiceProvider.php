@@ -1,4 +1,6 @@
-<?php namespace StubNamespace;
+<?php
+
+namespace StubNamespace;
 
 use Cucurbit\Framework\Support\ServiceProvider as CucurbitSupport;
 use Illuminate\Console\Scheduling\Schedule;

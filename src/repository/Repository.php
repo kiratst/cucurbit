@@ -1,11 +1,13 @@
-<?php namespace Cucurbit\Framework\Service\Repository;
+<?php
 
-use Cucurbit\Framework\Service\Repository\Interfaces\Repository as BaseRepository;
+namespace Cucurbit\Framework\Repository;
+
+use Cucurbit\Framework\Contracts\RepositoryInterface;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 
-abstract class Repository implements BaseRepository
+abstract class Repository implements RepositoryInterface
 {
 
 	public $path;

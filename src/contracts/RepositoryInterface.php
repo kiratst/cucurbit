@@ -1,8 +1,10 @@
-<?php namespace Cucurbit\Framework\Service\Repository\Interfaces;
+<?php
+
+namespace Cucurbit\Framework\Contracts;
 
 use Illuminate\Support\Collection;
 
-interface Repository
+interface RepositoryInterface
 {
 	/**
 	 * Get all modules.

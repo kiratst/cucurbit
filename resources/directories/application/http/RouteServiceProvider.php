@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'StubNamespace\Application\Controllers';
+	protected $namespace = 'StubNamespace\Controllers';
 
 	/**
 	 * Define your route model bindings, pattern filters, etc.
@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
 	public function mapWebRoutes()
 	{
 		\Route::group([
-			'namespace' => 'StubNamespace\Application\Controllers',
+			'namespace' => 'StubNamespace\Controllers',
 			'prefix'    => 'Module',
 		], function (Router $router) {
 			require_once module_path('Module', 'application/http/routes/front.php');
@@ -69,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
 	public function mapApiRoutes()
 	{
 		\Route::group([
-			'namespace' => 'StubNamespace\Application\Controllers',
+			'namespace' => 'StubNamespace\Controllers',
 			'prefix'    => 'api/Module',
 		], function (Router $router) {
 			require_once module_path('Module', 'application/http/routes/api.php');

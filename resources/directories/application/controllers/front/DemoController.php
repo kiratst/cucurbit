@@ -1,4 +1,6 @@
-<?php namespace StubNamespace\Application\Controllers\Front;
+<?php
+
+namespace StubNamespace\Controllers\Front;
 
 use Illuminate\Routing\Controller;
 

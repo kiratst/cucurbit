@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Consoles\Commands;
+<?php
+
+namespace Cucurbit\Framework\Consoles\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;

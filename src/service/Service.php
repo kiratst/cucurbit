@@ -1,6 +1,8 @@
-<?php namespace Cucurbit\Framework\Service;
+<?php
 
-use Cucurbit\Framework\Service\Repository\FileRepository;
+namespace Cucurbit\Framework\Service;
+
+use Cucurbit\Framework\Repository\FileRepository;
 use Illuminate\Foundation\Application;
 
 class Service

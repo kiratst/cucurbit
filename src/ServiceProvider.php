@@ -1,9 +1,12 @@
-<?php namespace Cucurbit\Framework;
+<?php
+
+namespace Cucurbit\Framework;
 
 use Cucurbit\Framework\Consoles\CommandServiceProvider;
-use Cucurbit\Framework\Service\Repository\FileRepository;
-use Cucurbit\Framework\Service\Repository\Interfaces\Repository;
+use Cucurbit\Framework\Contracts\RepositoryInterface;
+use Cucurbit\Framework\Repository\FileRepository;
 use Cucurbit\Framework\Service\Service;
+use Cucurbit\Framework\Support\AutoLoadServiceProvider;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -25,12 +28,14 @@ class ServiceProvider extends BaseServiceProvider
 
 	public function registerService()
 	{
-		$this->app->bind(Repository::class, FileRepository::class);
+		$this->app->bind(RepositoryInterface::class, FileRepository::class);
 
 		$this->app->singleton('cucurbit', function ($app) {
-			$repository = $app->make(Repository::class);
+			$repository = $app->make(RepositoryInterface::class);
 			return new Service($app, $repository);
 		});
+
+		$this->app->register(AutoLoadServiceProvider::class);
 	}
 
 	public function registerCommand()

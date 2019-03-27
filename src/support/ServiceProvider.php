@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Support;
+<?php
+
+namespace Cucurbit\Framework\Support;
 
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

@@ -38,7 +38,7 @@ if (!function_exists('module_class')) {
 	function module_class($module, $class = '')
 	{
 		$module    = ucfirst($module);
-		$name      = 'Modules\\' . $module;
+		$name      = $module;
 		$namespace = studly_case($name);
 
 		if (!$class) {

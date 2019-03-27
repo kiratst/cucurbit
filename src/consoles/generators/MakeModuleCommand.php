@@ -1,10 +1,8 @@
-<?php namespace Cucurbit\Framework\Consoles\Generators;
+<?php
 
-use Cucurbit\Framework\Service\Service;
-use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
+namespace Cucurbit\Framework\Consoles\Generators;
 
-class MakeModuleCommand extends Command
+class MakeModuleCommand extends BaseMakeCommand
 {
 	/**
 	 * The name and signature of the console command.
@@ -21,34 +19,6 @@ class MakeModuleCommand extends Command
 	protected $description = 'create a module';
 
 	/**
-	 * @var Filesystem
-	 */
-	protected $files;
-
-	/**
-	 * @var Service
-	 */
-	protected $service;
-
-	/**
-	 * @var array
-	 */
-	protected $replace_container = [];
-
-	/**
-	 * Create a new command instance.
-	 *
-	 * @param Filesystem $files
-	 * @param Service    $service
-	 */
-	public function __construct(Filesystem $files, Service $service)
-	{
-		parent::__construct();
-		$this->files   = $files;
-		$this->service = $service;
-	}
-
-	/**
 	 * Execute the console command.
 	 *
 	 * @return mixed
@@ -59,23 +29,15 @@ class MakeModuleCommand extends Command
 		$module = $this->argument('module');
 		$module = ucfirst(strtolower($module));
 
-		// create base module directory : Modules
-		if (!$this->files->isDirectory(module_path())) {
-			$this->files->makeDirectory(module_path());
-		}
-
-		if ($this->service->exists($module)) {
-			$this->error('Module ' . $module . ' already exists!');
+		if (!$this->checkModule($module)) {
 			return false;
 		}
 
 		// create module directory
 		$module_directory = module_path($module);
-		if (!$this->files->isDirectory($module_directory)) {
-			$this->files->makeDirectory($module_directory);
-		}
+		$this->makeDir($module_directory);
 
-		$this->replace_container['namespace'] = 'Modules\\' . ucfirst($module);
+		$this->replace_container['namespace'] = $this->getNamespace($module);
 		$this->replace_container['Module']    = lcfirst($module);
 
 		/* stubs resource
@@ -102,24 +64,4 @@ class MakeModuleCommand extends Command
 		return true;
 	}
 
-	/**
-	 * content replace
-	 *
-	 * @param string $content file content
-	 *
-	 * @return mixed
-	 */
-	public function replaceContent($content)
-	{
-		$search  = [
-			'Module',
-			'StubNamespace',
-		];
-		$replace = [
-			$this->replace_container['Module'],
-			$this->replace_container['namespace'],
-		];
-
-		return str_replace($search, $replace, $content);
-	}
 }

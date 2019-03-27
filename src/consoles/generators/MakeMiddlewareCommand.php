@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Consoles\Generators;
+<?php
+
+namespace Cucurbit\Framework\Consoles\Generators;
 
 use Cucurbit\Framework\Service\Service;
 use Illuminate\Console\Command;

@@ -1,4 +1,6 @@
-<?php namespace Cucurbit\Framework\Helper;
+<?php
+
+namespace Cucurbit\Framework\Helper;
 
 use Exception;
 
