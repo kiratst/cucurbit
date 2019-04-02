@@ -74,8 +74,8 @@ abstract class ServiceProvider extends BaseServiceProvider
 	 */
 	protected function bootPolicy()
 	{
-		foreach ($this->policies as $key => $value) {
-			\Gate::policy($key, $value);
+		foreach ($this->policies as $class => $policy) {
+			\Gate::policy($class, $policy);
 		}
 	}
 
