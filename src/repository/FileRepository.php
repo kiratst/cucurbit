@@ -45,7 +45,18 @@ class FileRepository extends Repository
 	 */
 	public function exists($key): bool
 	{
-		return $this->names()->offsetExists($key);
+		if ($this->names()->offsetExists($key)) {
+			return true;
+		}
+
+		$modules = $this->getAllBaseNames();
+		if ($modules->offsetExists($key)) {
+			$this->optimize();
+
+			return true;
+		}
+
+		return false;
 	}
 
 
@@ -167,6 +178,12 @@ class FileRepository extends Repository
 		$cachePath = $this->getCachePath();
 		if (!$this->files->exists($cachePath)) {
 			$this->createCache();
+		}
+
+		$cache = collect(json_decode($this->files->get($cachePath), true));
+
+		if ($cache->isEmpty()) {
+			$this->optimize();
 		}
 
 		return collect(json_decode($this->files->get($cachePath), true));
