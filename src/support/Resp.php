@@ -26,7 +26,6 @@ class Resp
 
 	/**
 	 * @param int $code
-	 * @return self
 	 */
 	public function setCode($code)
 	{
@@ -35,8 +34,6 @@ class Resp
 		}
 
 		$this->code = (int) $code;
-
-		return $this;
 	}
 
 	/**
@@ -49,7 +46,6 @@ class Resp
 
 	/**
 	 * @param string $message
-	 * @return self
 	 */
 	public function setMessage($message = '')
 	{
@@ -58,7 +54,6 @@ class Resp
 		}
 
 		$this->message = $message;
-		return $this;
 	}
 
 	/**
@@ -94,7 +89,7 @@ class Resp
 			$return['data'] = (array) $data;
 		}
 
-		return \Response::json($return, 200, JSON_UNESCAPED_UNICODE);
+		return \Response::json($return, 200, [], JSON_UNESCAPED_UNICODE);
 	}
 
 	/**

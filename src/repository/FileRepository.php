@@ -11,7 +11,7 @@ class FileRepository extends Repository
 	 * get all modules
 	 *
 	 * @return Collection
-	 * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+	 * @throws FileNotFoundException
 	 */
 	public function all(): Collection
 	{
@@ -22,7 +22,7 @@ class FileRepository extends Repository
 	 * get all modules name
 	 *
 	 * @return Collection
-	 * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+	 * @throws FileNotFoundException
 	 */
 	public function names(): Collection
 	{
@@ -97,7 +97,7 @@ class FileRepository extends Repository
 	 * @return bool
 	 * @throws FileNotFoundException
 	 */
-	public function updateComposer()
+	public function updateComposer(): bool
 	{
 		$names     = $this->getAllBaseNames();
 		$base_path = base_path();
@@ -157,7 +157,7 @@ class FileRepository extends Repository
 	 *
 	 * @return Collection
 	 */
-	private function createCache()
+	private function createCache(): Collection
 	{
 		$cachePath = $this->getCachePath();
 		$content   = json_encode([], JSON_PRETTY_PRINT);
@@ -171,7 +171,7 @@ class FileRepository extends Repository
 	 * get cache content
 	 *
 	 * @return Collection
-	 * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+	 * @throws FileNotFoundException
 	 */
 	private function getCache(): Collection
 	{

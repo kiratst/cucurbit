@@ -3,6 +3,7 @@
 namespace Cucurbit\Framework\Service;
 
 use Cucurbit\Framework\Repository\FileRepository;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Foundation\Application;
 
 class Service
@@ -32,7 +33,11 @@ class Service
 	public function register()
 	{
 		// all modules
-		$modules = $this->repository->all();
+		try {
+			$modules = $this->repository->all();
+		} catch (FileNotFoundException $e) {
+			return ;
+		}
 		$modules->each(function ($module, $module_name) {
 			$this->registerServiceProvider($module_name);
 			$this->autoloadFiles($module);

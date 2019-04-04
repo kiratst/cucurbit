@@ -157,7 +157,7 @@ class ClassAutoLoader
 		return $file_path;
 	}
 
-	private function isRealFilePath($path)
+	private function isRealFilePath($path): bool
 	{
 		return is_file(realpath($this->base_path . DIRECTORY_SEPARATOR . $path));
 	}
