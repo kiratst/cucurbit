@@ -178,13 +178,13 @@ if (!function_exists('is_ip')) {
 	}
 }
 
-if (!function_exists('image2base64')) {
+if (!function_exists('imageToBase64')) {
 	/**
 	 * image to base64
 	 * @param string $file_path file_path
 	 * @return string
 	 */
-	function image2base64($file_path)
+	function imageToBase64($file_path)
 	{
 		$image_info   = getimagesize($file_path);
 		$image_data   = fread(fopen($file_path, 'rb'), filesize($file_path));

@@ -25,7 +25,7 @@ class StringHelper
 	protected static $studlyCache = [];
 
 	/**
-	 * @desc 生成随机字符串
+	 * 生成随机字符串
 	 *
 	 * @param int $length 长度
 	 *
@@ -43,7 +43,7 @@ class StringHelper
 	}
 
 	/**
-	 * @desc 随机生成指定长度key值
+	 * 随机生成指定长度key值
 	 *
 	 * @param int $length 长度
 	 *
@@ -58,8 +58,7 @@ class StringHelper
 
 		if (\function_exists('openssl_random_pseudo_bytes')) {
 			$bytes = openssl_random_pseudo_bytes($length);
-			if ($bytes !== false || (int) $length === mb_strlen($bytes, '8bit')
-			) {
+			if ($bytes !== false || (int) $length === mb_strlen($bytes, '8bit')) {
 				return $bytes;
 			}
 
@@ -73,7 +72,7 @@ class StringHelper
 	}
 
 	/**
-	 * @desc 字符串截取,可截取中文
+	 * 字符串截取,可截取中文
 	 *
 	 * @param string $string  待截取字符传
 	 * @param int    $length  截取长度
@@ -103,7 +102,7 @@ class StringHelper
 	}
 
 	/**
-	 * @desc 去除字符串html格式
+	 * 去除字符串html格式
 	 *
 	 * @param string $string 字符串
 	 *
@@ -127,7 +126,7 @@ class StringHelper
 	}
 
 	/**
-	 * @desc text转html
+	 * text转html
 	 *
 	 * @param string $content 内容
 	 * @param string $type    p使用p标签包裹,br\r\n换成<br/>
@@ -214,7 +213,7 @@ class StringHelper
 	/**
 	 * 字符串转小写
 	 *
-	 * @param  string $value
+	 * @param string $value
 	 *
 	 * @return string
 	 */
@@ -226,8 +225,8 @@ class StringHelper
 	/**
 	 * 驼峰转下划线
 	 *
-	 * @param  string $value
-	 * @param  string $delimiter
+	 * @param string $value
+	 * @param string $delimiter
 	 *
 	 * @return string
 	 */
@@ -252,7 +251,7 @@ class StringHelper
 	/**
 	 * 下划线转驼峰(首字母大写)
 	 *
-	 * @param  string $value
+	 * @param string $value
 	 *
 	 * @return string
 	 */
@@ -272,7 +271,7 @@ class StringHelper
 	/**
 	 * 下划线转驼峰(首字母小写)
 	 *
-	 * @param  string $value
+	 * @param string $value
 	 *
 	 * @return string
 	 */
@@ -288,7 +287,7 @@ class StringHelper
 	/**
 	 * 转为首字母大写的标题格式
 	 *
-	 * @param  string $value
+	 * @param string $value
 	 *
 	 * @return string
 	 */

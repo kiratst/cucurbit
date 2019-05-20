@@ -40,7 +40,7 @@ class TimeHelper
 			$date = date('Y-m-d H:i:s');
 		}
 
-		return Carbon::parse($date)->hour(0)->minute(0)->second(0)->toDateTimeString();
+		return Carbon::parse($date)->startOfDay();
 	}
 
 	/**
@@ -54,7 +54,7 @@ class TimeHelper
 			$date = date('Y-m-d H:i:s');
 		}
 
-		return Carbon::parse($date)->hour(23)->minute(59)->second(59)->toDateTimeString();
+		return Carbon::parse($date)->endOfDay();
 	}
 
 	/**
